@@ -14,6 +14,9 @@ const Header = () => {
                               <li>
                                     <Link to={'/ShoppingPage'}>Shop</Link>
                               </li>
+                              <li>
+                                    <Link to={'/CheckoutPage'}>Checkout</Link>
+                              </li>
                         </ul>
                   </nav>
             </header>

@@ -1,4 +1,21 @@
 import { useState, useEffect } from 'react';
+import styles from '/src/styles/ShoppingPage.module.css';
+
+
+
+const ItemCard = ({ id, category, imgURL, title, price }) => {
+      return (
+            <div key={id} className={styles.card}>
+                  <p>{category}</p>
+                  <img src={imgURL} alt="Product Image" />
+                  <div>
+                        <p>{title}</p>
+                        <p>{price}</p>
+                  </div>
+                  <button>Add to cart</button>
+            </div>
+      );
+}
 
 const ShoppingPage = () => {
       const [products, setProducts] = useState([]);
@@ -40,11 +57,16 @@ const ShoppingPage = () => {
                   <p>List of Products</p>
                   {loading && <p>Loading...</p>}
                   {error && <p>Network Error</p>}
-                  <ul>
+                  <div className={styles.products}>
                         {products.map((product) => {
-                              return <li key={product.id}>{product.title}</li>
+                              return <ItemCard
+                                    id={product.id}
+                                    category={product.category}
+                                    imgURL={product.image}
+                                    title={product.title}
+                                    price={`$${product.price}`} />
                         })}
-                  </ul>
+                  </div>
             </>
       );
 }

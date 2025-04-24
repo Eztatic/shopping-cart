@@ -1,10 +1,10 @@
 .card {
   background-color: #ffffff;
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   min-height: 410px;
   padding: 1rem;
   border-radius: 6px;
-  /* outline: 2px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;

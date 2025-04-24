@@ -26,7 +26,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -37,7 +36,10 @@ h1 {
   line-height: 1.1;
 }
 
-/* CSS */
+ul {
+  list-style-type: none;
+}
+
 button {
   background-color: #0276ff;
   border-radius: 8px;

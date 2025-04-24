@@ -9,10 +9,11 @@ import Footer from './components/Footer.jsx'
 import './App.css';
 
 function App() {
+
   return (
     <>
+      <ShoppingCart />
       <Header />
-      {/* <ShoppingCart /> */}
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route

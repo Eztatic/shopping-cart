@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 import styles from '/src/styles/ShoppingPage.module.css';
 
-
-
-const ItemCard = ({ id, category, imgURL, title, price }) => {
+const ItemCard = ({ category, imgURL, title, price }) => {
       return (
-            <div key={id} className={styles.card}>
+            <div className={styles.card}>
                   <p>{category}</p>
                   <img src={imgURL} alt="Product Image" />
                   <div>
                         <p>{title}</p>
-                        <p>{price}</p>
+                        <p>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price)}</p>
                   </div>
-                  <button>Add to cart</button>
-            </div>
+                  <button aria-label={`Add ${title} to cart`}>
+                        Add to cart
+                  </button>
+            </div >
       );
 }
 
@@ -58,14 +58,15 @@ const ShoppingPage = () => {
                   {loading && <p>Loading...</p>}
                   {error && <p>Network Error</p>}
                   <div className={styles.products}>
-                        {products.map((product) => {
-                              return <ItemCard
-                                    id={product.id}
-                                    category={product.category}
-                                    imgURL={product.image}
-                                    title={product.title}
-                                    price={`$${product.price}`} />
-                        })}
+                        {products.map(({ id, category, image, title, price }) => (
+                              <ItemCard
+                                    key={id}
+                                    category={category}
+                                    imgURL={image}
+                                    title={title}
+                                    price={price}
+                              />
+                        ))}
                   </div>
             </>
       );

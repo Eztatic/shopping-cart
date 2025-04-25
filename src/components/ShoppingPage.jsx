@@ -1,23 +1,35 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styles from '/src/styles/ShoppingPage.module.css';
 
-const ItemCard = ({ category, imgURL, title, price }) => {
+const toTitleCase = (str) => {
+      return str
+            .toLowerCase()
+            .replace(/\w\S*/g, word =>
+                  word.charAt(0).toUpperCase() + word.slice(1)
+            );
+}
+
+
+const ItemCard = ({ category, imgURL, title, price, handler }) => {
+      const itemDetails = { category, imgURL, title, price };
+
       return (
             <div className={styles.card}>
-                  <p>{category}</p>
+                  <p>{toTitleCase(category)}</p>
                   <img src={imgURL} alt="Product Image" />
                   <div>
                         <p>{title}</p>
                         <p>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price)}</p>
                   </div>
-                  <button aria-label={`Add ${title} to cart`}>
+                  <button
+                        onClick={(e) => handler(e, itemDetails)} aria-label={`Add ${title} to cart`}>
                         Add to cart
                   </button>
             </div >
       );
 }
 
-const ShoppingPage = () => {
+const ShoppingPage = ({ addHandler }) => {
       const [products, setProducts] = useState([]);
       const [error, setError] = useState(null);
       const [loading, setLoading] = useState(true);
@@ -65,6 +77,7 @@ const ShoppingPage = () => {
                                     imgURL={image}
                                     title={title}
                                     price={price}
+                                    handler={addHandler}
                               />
                         ))}
                   </div>

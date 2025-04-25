@@ -6,26 +6,35 @@ import ShoppingPage from './components/ShoppingPage.jsx';
 import CheckoutPage from './components/CheckoutPage.jsx';
 import ShoppingCart from './components/ShoppingCart.jsx';
 import Footer from './components/Footer.jsx'
+import CartContext from './components/CartContext.jsx'
 import './App.css';
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (e, newItem) => {
+    e.preventDefault();
+    setCartItems(prevItems => [...prevItems, newItem]);
+  }
 
   return (
     <>
-      <ShoppingCart />
-      <Header />
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route
-          path='/ShoppingPage'
-          element={<ShoppingPage />}
-        />
-        <Route
-          path='/CheckoutPage'
-          element={<CheckoutPage />}
-        />
-      </Routes>
-      <Footer />
+      <CartContext.Provider value={cartItems}>
+        <ShoppingCart />
+        <Header />
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route
+            path='/ShoppingPage'
+            element={<ShoppingPage addHandler={addToCart} />}
+          />
+          <Route
+            path='/CheckoutPage'
+            element={<CheckoutPage />}
+          />
+        </Routes>
+        <Footer />
+      </CartContext.Provider>
     </>
   )
 }

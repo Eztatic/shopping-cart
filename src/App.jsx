@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router';
 import Header from './components/Header.jsx';
 import HomePage from './components/Homepage.jsx';
@@ -17,10 +17,15 @@ function App() {
     setCartItems(prevItems => [...prevItems, newItem]);
   }
 
+  const removeFromCart = (e, id) => {
+    e.preventDefault();
+    setCartItems(prevItems => prevItems.filter((item) => item.id !== id))
+  }
+
   return (
     <>
       <CartContext.Provider value={cartItems}>
-        <ShoppingCart />
+        <ShoppingCart removeHandler={removeFromCart} />
         <Header />
         <Routes>
           <Route path='/' element={<HomePage />} />

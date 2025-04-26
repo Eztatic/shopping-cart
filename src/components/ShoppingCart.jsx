@@ -4,6 +4,11 @@ import styles from '/src/styles/ShoppingCart.module.css';
 import { FaShoppingCart, FaTimes } from "react-icons/fa";
 import CartContext from './CartContext';
 
+const calculatePrice = (cartItems) => {
+      const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0)
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalPrice);
+}
+
 const CartButton = ({ openHandler }) => {
       const cart = useContext(CartContext);
 
@@ -15,7 +20,7 @@ const CartButton = ({ openHandler }) => {
       );
 }
 
-const CartItem = ({ imgURL, title, category, price }) => {
+const CartItem = ({ id, imgURL, title, category, price, handler }) => {
       return (
             <li className={styles['cart-item']}>
                   <div>
@@ -26,12 +31,12 @@ const CartItem = ({ imgURL, title, category, price }) => {
                         <p>{category}</p>
                         <p>{`$${price}`}</p>
                   </div>
-                  <button><FaTimes /></button>
+                  <button onClick={(e) => handler(e, id)}><FaTimes /></button>
             </li>
       );
 }
 
-const ShoppingCart = () => {
+const ShoppingCart = ({ removeHandler }) => {
       const [isOpen, setIsOpen] = useState(true);
       const cart = useContext(CartContext);
 
@@ -44,20 +49,22 @@ const ShoppingCart = () => {
                         <ul>
                               {cart.length === 0 ? <li>No Items Here</li> : null}
                               {
-                                    cart.map(({ imgURL, title, category, price }) => {
+                                    cart.map(({ id, imgURL, title, category, price }) => {
                                           return <CartItem
-                                                key={crypto.randomUUID()}
+                                                key={id}
+                                                id={id}
                                                 imgURL={imgURL}
                                                 title={title}
                                                 category={category}
-                                                price={price} />;
+                                                price={price}
+                                                handler={removeHandler} />;
                                     })
                               }
                         </ul>
                         <hr />
                         <div>
-                              <p>Number of Items: 0</p>
-                              <p>Total: $00.00</p>
+                              <p>Number of Items: {cart.length}</p>
+                              <p>Total: $ {calculatePrice(cart)}</p>
                         </div>
                         <div>
                               <Link to={'/CheckoutPage'} className={styles['checkout-button']}>Checkout</Link>

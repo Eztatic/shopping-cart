@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '/src/styles/ShoppingPage.module.css';
 
 const toTitleCase = (str) => {
@@ -11,7 +11,8 @@ const toTitleCase = (str) => {
 
 
 const ItemCard = ({ category, imgURL, title, price, handler }) => {
-      const itemDetails = { category, imgURL, title, price };
+      const id = crypto.randomUUID();
+      const itemDetails = { id, category, imgURL, title, price };
 
       return (
             <div className={styles.card}>

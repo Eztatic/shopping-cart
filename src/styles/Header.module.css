@@ -1,9 +1,27 @@
+.header {
+}
+
+.header > nav > ul {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.header > nav > ul > li > a {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
 .items {
   font-size: 0.75em;
   color: #fff;
   background-color: #ff0000;
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
+
   border-radius: 50%;
   display: flex;
   align-items: center;

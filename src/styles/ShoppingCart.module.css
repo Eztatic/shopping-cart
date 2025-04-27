@@ -101,7 +101,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   position: relative;
 }
 
@@ -121,7 +120,7 @@
   position: absolute;
 }
 
-.cart-item > div > p {
+.cart-item > div:last-of-type > p {
   width: 100%;
   line-height: 1rem;
   text-align: start;
@@ -130,7 +129,24 @@
   text-overflow: ellipsis;
 }
 
-.cart-item > div > p:nth-child(2) {
+.quantity {
+  width: 1em;
+  height: 1em;
+  font-size: 1em;
+  font-weight: 500;
+  color: #000000;
+  background-color: #bbbbbb;
+  padding: 12px;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: -8px;
+  top: -8px;
+}
+
+.cart-item > div:last-of-type > p:nth-child(2) {
   font-size: 0.8em;
   color: #797979;
 }

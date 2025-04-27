@@ -17,17 +17,17 @@
   object-fit: contain;
 }
 
-.card > div {
+.card > .title {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
 }
 
-.card > div > p {
+.card > .title > p {
   text-align: start;
 }
 
-.card > div > p:first-of-type {
+.card > .title > p:first-of-type {
   flex-grow: 1;
 }
 
@@ -38,4 +38,32 @@
   gap: 1.5rem;
 }
 
+.disabled {
+  background-color: #59a4ff;
+  cursor: not-allowed;
+}
 
+.quantity {
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quantity > button {
+  font-size: 1.5rem;
+  width: 3rem;
+  height: 1.5rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantity > input {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #000;
+  border-radius: 4px;
+}

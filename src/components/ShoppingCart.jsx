@@ -2,12 +2,8 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import styles from '/src/styles/ShoppingCart.module.css';
 import { FaShoppingCart, FaTimes } from "react-icons/fa";
+import { calculatePrice, calculateNumberOfItems } from "./Utility.jsx";
 import CartContext from './CartContext';
-
-const calculatePrice = (cartItems) => {
-      const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0)
-      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalPrice);
-}
 
 const CartButton = ({ openHandler }) => {
       const cart = useContext(CartContext);
@@ -15,16 +11,18 @@ const CartButton = ({ openHandler }) => {
       return (
             <button className={styles['cart-button']} onClick={openHandler}>
                   <FaShoppingCart />
-                  <p>{cart.length}</p>
+                  <p>{calculateNumberOfItems(cart)}</p>
             </button>
       );
 }
 
-const CartItem = ({ id, imgURL, title, category, price, handler }) => {
+const CartItem = (
+      { id, imgURL, title, category, price, quantity, handler }) => {
       return (
             <li className={styles['cart-item']}>
                   <div>
                         <img src={imgURL} alt="Item Image" />
+                        <p className={styles.quantity}>{quantity}</p>
                   </div>
                   <div>
                         <p>{title}</p>
@@ -49,22 +47,23 @@ const ShoppingCart = ({ removeHandler }) => {
                         <ul>
                               {cart.length === 0 ? <li>No Items Here</li> : null}
                               {
-                                    cart.map(({ id, imgURL, title, category, price }) => {
+                                    cart.map(({ id, imgURL, title, category, price, quantity }) => {
                                           return <CartItem
                                                 key={id}
                                                 id={id}
                                                 imgURL={imgURL}
                                                 title={title}
                                                 category={category}
-                                                price={price}
+                                                price={(price * quantity).toFixed(2)}
+                                                quantity={quantity}
                                                 handler={removeHandler} />;
                                     })
                               }
                         </ul>
                         <hr />
                         <div>
-                              <p>Number of Items: {cart.length}</p>
-                              <p>Total: $ {calculatePrice(cart)}</p>
+                              <p>Number of Items: {calculateNumberOfItems(cart)}</p>
+                              <p>Total: {calculatePrice(cart)}</p>
                         </div>
                         <div>
                               <Link to={'/CheckoutPage'} className={styles['checkout-button']}>Checkout</Link>
@@ -77,4 +76,4 @@ const ShoppingCart = ({ removeHandler }) => {
       );
 }
 
-export default ShoppingCart;
+export { ShoppingCart, calculateNumberOfItems };

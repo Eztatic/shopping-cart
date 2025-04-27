@@ -12,18 +12,71 @@ const toTitleCase = (str) => {
 
 const ItemCard = ({ category, imgURL, title, price, handler }) => {
       const id = crypto.randomUUID();
-      const itemDetails = { id, category, imgURL, title, price };
+      const [quantity, setQuantity] = useState(1);
+      const itemDetails = { id, category, imgURL, title, price, quantity };
+
+      const decrement = () => {
+            setQuantity(prev => (prev > 1 ? prev - 1 : 1));
+      }
+
+      const increment = () => {
+            setQuantity(prev => (prev < 100 ? Number(prev) + 1 : 100));
+      }
+
+      const addToCartHandler = (e) => {
+            handler(e, itemDetails);
+            setQuantity(1);
+      }
+
+      const onChangeHandler = (e) => {
+            const value = e.target.value;
+
+            if (value === '') {
+                  setQuantity('');
+                  return;
+            }
+
+            const numericValue = Number(value);
+
+            if (isNaN(numericValue)) {
+                  setQuantity(1);
+                  return;
+            }
+
+            if (numericValue > 100) {
+                  setQuantity(100);
+                  return;
+            }
+
+            setQuantity(numericValue);
+      }
+
+
 
       return (
             <div className={styles.card}>
                   <p>{toTitleCase(category)}</p>
                   <img src={imgURL} alt="Product Image" />
-                  <div>
+                  <div className={styles.title}>
                         <p>{title}</p>
                         <p>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price)}</p>
                   </div>
+                  <div className={styles.quantity}>
+                        <button type='button' onClick={decrement}>-</button>
+                        <input
+                              type="number"
+                              value={quantity}
+                              min={1}
+                              max={100}
+                              onChange={onChangeHandler}
+                        />
+                        <button type='button' onClick={increment}>+</button>
+                  </div>
                   <button
-                        onClick={(e) => handler(e, itemDetails)} aria-label={`Add ${title} to cart`}>
+                        className={`${quantity < 1 || quantity > 100 ? styles.disabled : ''}`}
+                        disabled={quantity < 1 || quantity > 100}
+                        onClick={addToCartHandler}
+                        aria-label={`Add ${title} to cart`}>
                         Add to cart
                   </button>
             </div >

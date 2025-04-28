@@ -76,4 +76,4 @@ const ShoppingCart = ({ removeHandler }) => {
       );
 }
 
-export { ShoppingCart, calculateNumberOfItems };
+export default ShoppingCart;

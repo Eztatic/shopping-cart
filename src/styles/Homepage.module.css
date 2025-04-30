@@ -1,0 +1,54 @@
+.homepage {
+  background-image: url("https://img.freepik.com/free-photo/top-view-accessoires-travel-with-women-clothing-concept-white_1921-108.jpg?t=st=1745931660~exp=1745935260~hmac=94f9f3553a47ecba0eee7273fdad6f06dc4291b3f736d5439c854a39b9b28c8b&w=996");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage > div {
+  background-color: rgba(54, 54, 54, 0.377);
+  color: #e0e0e0;
+  width: 1200px;
+  height: 400px;
+  padding: 8rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage > div p {
+  font-size: 1.5rem;
+}
+
+.go-to-shop-btn {
+  position: absolute;
+  bottom: 17.5%;
+  background-color: #0276ff;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 100%;
+  line-height: 18px;
+  padding: 10px 24px;
+  text-align: center;
+  transition: color 0.13s ease-in-out, background 0.13s ease-in-out,
+    opacity 0.13s ease-in-out, box-shadow 0.13s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.go-to-shop-btn:active,
+.go-to-shop-btn:hover {
+  color: #ffffffb9;
+  background-color: #59a4ff;
+}

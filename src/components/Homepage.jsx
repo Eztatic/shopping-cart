@@ -1,10 +1,17 @@
+import { Link } from 'react-router';
+import Styles from '/src/styles/Homepage.module.css';
 
 const HomePage = () => {
       return (
-            <>
-                  <h1>Homepage</h1>
-                  <p>This is a homepage</p>
-            </>
+            <section className={Styles.homepage}>
+                  <div>
+                        <div>
+                              <h1>Elevate Your Everyday Style</h1>
+                              <p>Discover curated fashion and accessories designed to move with you — effortlessly bold, always in season.</p>
+                        </div>
+                        <Link to={'/ShoppingPage'} className={Styles['go-to-shop-btn']}>Shop Now</Link>
+                  </div>
+            </section>
       );
 }
 

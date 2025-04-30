@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Arizonia&display=swap");
+
+.footer {
+  width: 100%;
+  background-color: #ffd63a;
+  padding: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-footer {
+  composes: logo from "/src/styles/Header.module.css";
+}
+
+.footer > div {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer > div > ul {
+  display: flex;
+  gap: 1rem;
+}
+
+.icons {
+  font-size: 2rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.footer > div > p {
+  font-size: 0.9em;
+  color: #383838;
+}

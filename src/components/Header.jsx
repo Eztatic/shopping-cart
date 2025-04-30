@@ -9,14 +9,19 @@ const Header = () => {
       const cart = useContext(CartContext);
       return (
             <header className={Styles.header}>
-                  <h1>Header</h1>
                   <nav>
                         <ul>
                               <li>
-                                    <Link to={'/'}>Homepage</Link>
+                                    <Link to={'/'}>Home</Link>
                               </li>
                               <li>
                                     <Link to={'/ShoppingPage'}>Shop</Link>
+                              </li>
+                              <li>
+                                    <h1 className={Styles.logo}>Outfique</h1>
+                              </li>
+                              <li>
+                                    <a href="#">About Us</a>
                               </li>
                               <li>
                                     <Link to={'/CheckoutPage'}>

@@ -84,6 +84,7 @@
 
 /* Cart Item */
 .cart-item {
+  background-color: #ffd63a;
   width: 100%;
   height: 100px;
   padding: 1rem;

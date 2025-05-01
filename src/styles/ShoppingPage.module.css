@@ -1,8 +1,21 @@
+.shopping-page {
+  margin: 2rem auto;
+  width: 100%;
+  height: 100%;
+  max-width: 1280px;
+  min-height: 70vh;
+  position: relative;
+}
+
+.shopping-page > h1 {
+  margin-bottom: 1rem;
+}
+
 .card {
-  background-color: #ffffff;
+  background-color: #ffd63a;
   width: 100%;
   max-width: 300px;
-  min-height: 410px;
+  min-height: 420px;
   padding: 1rem;
   border-radius: 6px;
   display: flex;
@@ -11,7 +24,17 @@
   gap: 6px;
 }
 
-.card > img {
+.card > div:first-of-type {
+  background-color: #fff;
+  width: calc(300px - 2rem);
+  height: calc(300px - 2.5rem);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card > div > img {
   width: 100%;
   height: 250px;
   object-fit: contain;
@@ -61,9 +84,91 @@
   align-items: center;
 }
 
+.quantity > button:first-of-type {
+  background-color: #ff3c38;
+}
+
+.quantity > button:last-of-type {
+  background-color: #21bf73;
+}
+
 .quantity > input {
   text-align: center;
   padding: 8px;
   border: 1px solid #000;
   border-radius: 4px;
+}
+
+.error-icon {
+  font-size: 2rem;
+  margin-right: 8px;
+}
+
+.network-error {
+  font-size: 1.25rem;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.network-error > p:first-of-type {
+  line-height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.network-error > p:last-of-type {
+  padding-left: 4px;
+}
+
+.check-icon {
+  font-size: 2rem;
+  color: #27bb2e;
+  margin-right: 0.25rem;
+}
+
+.cart-confirmation {
+  background-color: #ffd63a;
+  width: fit-content;
+  padding: 1rem 2rem;
+  border: 1px solid #59a4ff;
+  border-radius: 8px;
+  position: fixed;
+  left: -100%;
+  bottom: 2rem;
+}
+
+.cart-confirmation > p {
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-confirmation.animate {
+  animation: slideFade 5s ease-out forwards;
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 1;
+    filter: blur(16px);
+  }
+
+  10% {
+    left: 2rem;
+    filter: blur(0);
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    left: 2rem;
+  }
 }

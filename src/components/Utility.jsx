@@ -7,4 +7,12 @@ const calculateNumberOfItems = (cartItems) => {
       return cartItems.reduce((sum, item) => sum + item.quantity, 0);
 }
 
-export { calculatePrice, calculateNumberOfItems }
+const toTitleCase = (str) => {
+      return str
+            .toLowerCase()
+            .replace(/\w\S*/g, word =>
+                  word.charAt(0).toUpperCase() + word.slice(1)
+            );
+}
+
+export { calculatePrice, calculateNumberOfItems, toTitleCase }

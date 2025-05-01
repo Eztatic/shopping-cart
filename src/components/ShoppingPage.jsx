@@ -1,16 +1,31 @@
 import { useState, useEffect } from 'react';
-import styles from '/src/styles/ShoppingPage.module.css';
+import Styles from '/src/styles/ShoppingPage.module.css';
+import { toTitleCase } from '/src/components/Utility.jsx';
+import { ClipLoader } from "react-spinners";
+import { MdError, MdCheckCircle } from "react-icons/md";
 
-const toTitleCase = (str) => {
-      return str
-            .toLowerCase()
-            .replace(/\w\S*/g, word =>
-                  word.charAt(0).toUpperCase() + word.slice(1)
-            );
+const NetworkError = () => {
+      return (
+            <div className={Styles['network-error']}>
+                  <p><MdError className={Styles['error-icon']} /> Network Request Timeout.</p>
+                  <p>Try to refresh the page</p>
+            </div>
+      );
 }
 
+const CartConfirmation = ({ animationKey }) => {
+      const animate = animationKey ? Styles.animate : "";
 
-const ItemCard = ({ category, imgURL, title, price, handler }) => {
+      return (
+            <div key={animationKey} className={`${Styles['cart-confirmation']} ${animate}`}>
+                  <p><MdCheckCircle className={Styles['check-icon']} />
+                        Item has been added to cart
+                  </p>
+            </div>
+      );
+}
+
+const ItemCard = ({ category, imgURL, title, price, handler, notify }) => {
       const id = crypto.randomUUID();
       const [quantity, setQuantity] = useState(1);
       const itemDetails = { id, category, imgURL, title, price, quantity };
@@ -24,6 +39,7 @@ const ItemCard = ({ category, imgURL, title, price, handler }) => {
       }
 
       const addToCartHandler = (e) => {
+            notify();
             handler(e, itemDetails);
             setQuantity(1);
       }
@@ -51,17 +67,17 @@ const ItemCard = ({ category, imgURL, title, price, handler }) => {
             setQuantity(numericValue);
       }
 
-
-
       return (
-            <div className={styles.card}>
+            <div className={Styles.card}>
                   <p>{toTitleCase(category)}</p>
-                  <img src={imgURL} alt="Product Image" />
-                  <div className={styles.title}>
+                  <div>
+                        <img src={imgURL} alt="Product Image" />
+                  </div>
+                  <div className={Styles.title}>
                         <p>{title}</p>
                         <p>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price)}</p>
                   </div>
-                  <div className={styles.quantity}>
+                  <div className={Styles.quantity}>
                         <button type='button' onClick={decrement}>-</button>
                         <input
                               type="number"
@@ -73,7 +89,7 @@ const ItemCard = ({ category, imgURL, title, price, handler }) => {
                         <button type='button' onClick={increment}>+</button>
                   </div>
                   <button
-                        className={`${quantity < 1 || quantity > 100 ? styles.disabled : ''}`}
+                        className={`${quantity < 1 || quantity > 100 ? Styles.disabled : ''}`}
                         disabled={quantity < 1 || quantity > 100}
                         onClick={addToCartHandler}
                         aria-label={`Add ${title} to cart`}>
@@ -87,6 +103,11 @@ const ShoppingPage = ({ addHandler }) => {
       const [products, setProducts] = useState([]);
       const [error, setError] = useState(null);
       const [loading, setLoading] = useState(true);
+      const [animateKey, setAnimateKey] = useState(0);
+
+      const notify = () => {
+            setAnimateKey(Date.now());
+      }
 
       useEffect(() => {
             const controller = new AbortController();
@@ -94,6 +115,7 @@ const ShoppingPage = ({ addHandler }) => {
 
             const fetchProducts = async () => {
                   try {
+                        await new Promise(resolve => setTimeout(resolve, 2000));
                         const response = await fetch('https://fakestoreapi.com/products', {
                               mode: "cors",
                               signal
@@ -119,22 +141,26 @@ const ShoppingPage = ({ addHandler }) => {
 
       return (
             <>
-                  <h1>Shopping Page</h1>
-                  <p>List of Products</p>
-                  {loading && <p>Loading...</p>}
-                  {error && <p>Network Error</p>}
-                  <div className={styles.products}>
-                        {products.map(({ id, category, image, title, price }) => (
-                              <ItemCard
-                                    key={id}
-                                    category={category}
-                                    imgURL={image}
-                                    title={title}
-                                    price={price}
-                                    handler={addHandler}
-                              />
-                        ))}
-                  </div>
+                  <section className={Styles['shopping-page']}>
+                        <h1>Products</h1>
+                        {loading
+                              && <ClipLoader color={"#006eff"} size={"64"} />}
+                        {error && <NetworkError />}
+                        <div className={Styles.products}>
+                              {products.map(({ id, category, image, title, price }) => (
+                                    <ItemCard
+                                          key={id}
+                                          category={category}
+                                          imgURL={image}
+                                          title={title}
+                                          price={price}
+                                          handler={addHandler}
+                                          notify={notify}
+                                    />
+                              ))}
+                        </div>
+                  </section>
+                  <CartConfirmation animationKey={animateKey} />
             </>
       );
 }

@@ -64,6 +64,7 @@
 .disabled {
   background-color: #59a4ff;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 .quantity {
@@ -149,7 +150,7 @@
 }
 
 .cart-confirmation.animate {
-  animation: slideFade 5s ease-out forwards;
+  animation: slideFade 3s ease-out forwards;
 }
 
 @keyframes slideFade {

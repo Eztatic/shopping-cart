@@ -22,6 +22,10 @@ function App() {
     setCartItems(prevItems => prevItems.filter((item) => item.id !== id))
   }
 
+  const clearCart = () => {
+    setCartItems([]);
+  }
+
   return (
     <>
       <CartContext.Provider value={cartItems}>
@@ -35,7 +39,7 @@ function App() {
           />
           <Route
             path='/CheckoutPage'
-            element={<CheckoutPage />}
+            element={<CheckoutPage resetCartHandler={clearCart} />}
           />
         </Routes>
         <Footer />

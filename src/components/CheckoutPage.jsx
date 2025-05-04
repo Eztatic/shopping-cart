@@ -1,11 +1,25 @@
-import { useContext } from 'react'
-import styles from '/src/styles/CheckoutPage.module.css';
+import { useState, useContext } from 'react'
+import Styles from '/src/styles/CheckoutPage.module.css';
 import CartContext from '/src/components/CartContext.jsx';
-import CartStyles from '/src/styles/ShoppingCart.module.css'
+import CartStyles from '/src/styles/ShoppingCart.module.css';
+import { MdCheckCircle } from "react-icons/md";
+
+const CheckoutConfirmation = ({ isVisible }) => {
+      const visibility = isVisible ? Styles.visible : '';
+
+      return (
+            <div className={`${Styles['checkout-confirmation']} ${visibility}`}>
+                  <div>
+                        <MdCheckCircle className={Styles['check-icon-1']} />
+                        <h2>Order Completed</h2>
+                  </div>
+            </div>
+      );
+}
 
 const Item = ({ imgURL, quantity, title, category, price }) => {
       return (
-            <li className={`${CartStyles['cart-item']} ${styles['list-item']}`}>
+            <li className={`${CartStyles['cart-item']} ${Styles['list-item']}`}>
                   <div>
                         <img src={imgURL} alt="Item Image" />
                         <p className={CartStyles.quantity}>{quantity}</p>
@@ -23,7 +37,7 @@ const OrderSummary = () => {
       const cart = useContext(CartContext);
 
       return (
-            <div className={styles['order-summary']}>
+            <div className={Styles['order-summary']}>
                   <h2>Order Summary</h2>
                   <ul>
                         {cart.length === 0 ? <li>No Items Here</li> : null}
@@ -46,7 +60,7 @@ const OrderSummary = () => {
 
 const FormCheckout = () => {
       return (
-            <form onSubmit={(e) => e.preventDefault()} className={styles['checkout-form']}>
+            <form onSubmit={(e) => e.preventDefault()} className={Styles['checkout-form']}>
                   <h2>Checkout Form</h2>
                   <div>
                         <label htmlFor="email">Email</label>
@@ -56,7 +70,7 @@ const FormCheckout = () => {
                         <label htmlFor="name">Name</label>
                         <input type="text" id="name" name="name" placeholder="Adam Peter" />
                   </div>
-                  <div className={styles.address}>
+                  <div className={Styles.address}>
                         <label htmlFor="address">Address</label>
                         <input type="text" id="country" name="country" placeholder="Country" />
                         <input type="text" id="address" name="address" placeholder="Address" />
@@ -75,9 +89,12 @@ const FormCheckout = () => {
       );
 }
 
-const PaymentSummary = () => {
+const PaymentSummary = ({ buttonHandler }) => {
+      const cart = useContext(CartContext);
+      const isDisabled = cart.length === 0 ? Styles.disabled1 : null;
+
       return (
-            <div className={styles.payments}>
+            <div className={Styles.payments}>
                   <p>Payment Summary</p>
                   <span>
                         <p>Discount</p>
@@ -91,20 +108,32 @@ const PaymentSummary = () => {
                         <p>Total</p>
                         <p>$9.00</p>
                   </span>
-                  <button>Complete Order</button>
+                  <button onClick={buttonHandler} className={isDisabled}>Complete Order</button>
             </div>
       );
 }
 
-const CheckoutPage = () => {
+const CheckoutPage = ({ resetCartHandler }) => {
+      const [confirmation, setConfirmation] = useState(false);
+
+      const buttonHandler = (e) => {
+            e.preventDefault();
+            resetCartHandler();
+            setConfirmation(true);
+            setTimeout(() => setConfirmation(false), 3000);
+      }
+
       return (
-            <section className={styles['checkout-page']}>
-                  <OrderSummary />
-                  <div>
-                        <FormCheckout />
-                        <PaymentSummary />
-                  </div>
-            </section>
+            <>
+                  <CheckoutConfirmation isVisible={confirmation} />
+                  <section className={Styles['checkout-page']}>
+                        <OrderSummary />
+                        <div>
+                              <FormCheckout />
+                              <PaymentSummary buttonHandler={buttonHandler} />
+                        </div>
+                  </section>
+            </>
       );
 }
 

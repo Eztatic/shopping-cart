@@ -7,7 +7,7 @@ import CheckoutPage from './components/CheckoutPage.jsx';
 import ShoppingCart from './components/ShoppingCart.jsx';
 import Footer from './components/Footer.jsx'
 import CartContext from './components/CartContext.jsx'
-import './App.css';
+import '/src/styles/App.css';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);

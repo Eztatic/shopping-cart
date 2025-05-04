@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Styles from '/src/styles/ShoppingPage.module.css';
 import { toTitleCase } from '/src/components/Utility.jsx';
 import { ClipLoader } from "react-spinners";
 import { MdError, MdCheckCircle } from "react-icons/md";
+import { useFetchProducts } from '/src/components/useFetchProducts';
 
 const NetworkError = () => {
       return (
@@ -100,44 +101,14 @@ const ItemCard = ({ category, imgURL, title, price, handler, notify }) => {
 }
 
 const ShoppingPage = ({ addHandler }) => {
-      const [products, setProducts] = useState([]);
-      const [error, setError] = useState(null);
-      const [loading, setLoading] = useState(true);
+      const { products, loading, error } = useFetchProducts();
       const [animateKey, setAnimateKey] = useState(0);
 
       const notify = () => {
             setAnimateKey(Date.now());
       }
 
-      useEffect(() => {
-            const controller = new AbortController();
-            const signal = controller.signal;
 
-            const fetchProducts = async () => {
-                  try {
-                        await new Promise(resolve => setTimeout(resolve, 2000));
-                        const response = await fetch('https://fakestoreapi.com/products', {
-                              mode: "cors",
-                              signal
-                        });
-
-                        if (response.status >= 400) throw new Error("Server Error");
-
-                        const data = await response.json();
-                        setProducts(data);
-                  } catch (error) {
-                        if (error.name !== 'AbortError') {
-                              setError(error);
-                        }
-                  } finally {
-                        setLoading(false);
-                  }
-            }
-
-            fetchProducts();
-
-            return () => controller.abort();
-      }, [])
 
       return (
             <>

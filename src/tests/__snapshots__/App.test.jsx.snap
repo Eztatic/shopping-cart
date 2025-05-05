@@ -1,0 +1,231 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App Routing > renders header, homepage, and footer by default 1`] = `
+<DocumentFragment>
+  <button
+    class="_cart-button_2bbfe6"
+  >
+    <svg
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      stroke-width="0"
+      viewBox="0 0 576 512"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"
+      />
+    </svg>
+    <p>
+      0
+    </p>
+  </button>
+  <aside
+    class="_cart-panel_2bbfe6 _close_2bbfe6"
+  >
+    <h1>
+      Your Cart
+    </h1>
+    <hr />
+    <ul>
+      <li>
+        No Items Here
+      </li>
+    </ul>
+    <hr />
+    <div>
+      <p>
+        Number of Items: 0
+      </p>
+      <p>
+        Total: $0.00
+      </p>
+    </div>
+    <div>
+      <a
+        class="_checkout-button_2bbfe6"
+        data-discover="true"
+        href="/CheckoutPage"
+      >
+        Checkout
+      </a>
+      <button>
+        Close
+      </button>
+    </div>
+  </aside>
+  <header
+    class="_header_a9d33c"
+  >
+    <nav>
+      <ul>
+        <li>
+          <a
+            data-discover="true"
+            href="/"
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            data-discover="true"
+            href="/ShoppingPage"
+          >
+            Shop
+          </a>
+        </li>
+        <li>
+          <h1
+            class="_logo_a9d33c"
+          >
+            Outfique
+          </h1>
+        </li>
+        <li>
+          <a
+            href="#"
+          >
+            About Us
+          </a>
+        </li>
+        <li>
+          <a
+            data-discover="true"
+            href="/CheckoutPage"
+          >
+            Checkout
+            <p
+              class="_items_a9d33c"
+            >
+              0
+            </p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <section
+    class="_homepage_524292"
+  >
+    <div>
+      <div>
+        <h1>
+          Elevate Your Everyday Style
+        </h1>
+        <p>
+          Discover curated fashion and accessories designed to move with you — effortlessly bold, always in season.
+        </p>
+      </div>
+      <a
+        class="_go-to-shop-btn_524292"
+        data-discover="true"
+        href="/ShoppingPage"
+      >
+        Shop Now
+      </a>
+    </div>
+  </section>
+  <footer
+    class="_footer_4d8704"
+  >
+    <div>
+      <h1
+        class="_logo-footer_4d8704"
+      >
+        Outfique
+      </h1>
+      <ul>
+        <li>
+          <a
+            href="#"
+          >
+            Contact Us
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+          >
+            FAQ
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+          >
+            Privacy Policy
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+          >
+            Terms & Conditions
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+          >
+            Returns & Exchanges
+          </a>
+        </li>
+      </ul>
+      <div
+        class="_icons_4d8704"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 448 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+          />
+        </svg>
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 320 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+          />
+        </svg>
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div>
+      <p>
+        Outfique © 2025
+      </p>
+      <p>
+        All Creative Rights Protected by Outfique
+      </p>
+    </div>
+  </footer>
+</DocumentFragment>
+`;

@@ -108,8 +108,6 @@ const ShoppingPage = ({ addHandler }) => {
             setAnimateKey(Date.now());
       }
 
-
-
       return (
             <>
                   <section className={Styles['shopping-page']}>

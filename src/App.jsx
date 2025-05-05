@@ -1,13 +1,25 @@
 import { useState } from 'react';
-import { Routes, Route } from 'react-router';
-import Header from './components/Header.jsx';
-import HomePage from './components/Homepage.jsx';
-import ShoppingPage from './components/ShoppingPage.jsx';
-import CheckoutPage from './components/CheckoutPage.jsx';
-import ShoppingCart from './components/ShoppingCart.jsx';
-import Footer from './components/Footer.jsx'
-import CartContext from './components/CartContext.jsx'
+import { Routes, Route, Outlet } from 'react-router';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HomePage from './components/Homepage';
+import ShoppingPage from './components/ShoppingPage';
+import CheckoutPage from './components/CheckoutPage';
+import ShoppingCart from './components/ShoppingCart';
+import UnknownPage from './components/UnknownPage';
+import CartContext from './components/CartContext';
 import '/src/styles/App.css';
+
+function Layout({ cartItems, removeFromCart }) {
+  return (
+    <CartContext.Provider value={cartItems}>
+      <ShoppingCart removeHandler={removeFromCart} />
+      <Header />
+      <Outlet />
+      <Footer />
+    </CartContext.Provider>
+  );
+}
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -22,29 +34,27 @@ function App() {
     setCartItems(prevItems => prevItems.filter((item) => item.id !== id))
   }
 
-  const clearCart = () => {
-    setCartItems([]);
-  }
+  const clearCart = () => setCartItems([]);
 
   return (
-    <>
-      <CartContext.Provider value={cartItems}>
-        <ShoppingCart removeHandler={removeFromCart} />
-        <Header />
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route
-            path='/ShoppingPage'
-            element={<ShoppingPage addHandler={addToCart} />}
-          />
-          <Route
-            path='/CheckoutPage'
-            element={<CheckoutPage resetCartHandler={clearCart} />}
-          />
-        </Routes>
-        <Footer />
-      </CartContext.Provider>
-    </>
+
+    <Routes>
+      <Route element={
+        <Layout
+          cartItems={cartItems}
+          removeFromCart={removeFromCart} />}>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/ShoppingPage"
+          element={<ShoppingPage addHandler={addToCart} />} />
+        <Route
+          path="/CheckoutPage"
+          element={<CheckoutPage resetCartHandler={clearCart} />} />
+      </Route>
+
+      <Route path="*" element={<UnknownPage />} />
+    </Routes>
+
   )
 }
 

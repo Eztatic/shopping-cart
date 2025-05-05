@@ -1,4 +1,4 @@
-import { describe, it, test, expect } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 import { calculatePrice, calculateNumberOfItems, toTitleCase } from '../components/Utility';
 

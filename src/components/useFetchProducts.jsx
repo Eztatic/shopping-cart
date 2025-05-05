@@ -11,7 +11,9 @@ export const useFetchProducts = () => {
 
             const fetchProducts = async () => {
                   try {
-                        await new Promise(resolve => setTimeout(resolve, 2000)); // simulate delay
+                        // Uncomment only to show that loading spinner is working.
+                        // await new Promise(resolve => setTimeout(resolve, 2000));
+
                         const response = await fetch('https://fakestoreapi.com/products', {
                               mode: 'cors',
                               signal,

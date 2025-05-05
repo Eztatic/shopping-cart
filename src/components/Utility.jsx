@@ -9,10 +9,10 @@ const calculateNumberOfItems = (cartItems) => {
 
 const toTitleCase = (str) => {
       return str
+            .replace(/([a-z])([A-Z])/g, '$1 $2')
+            .replace(/[_-]/g, ' ')
             .toLowerCase()
-            .replace(/\w\S*/g, word =>
-                  word.charAt(0).toUpperCase() + word.slice(1)
-            );
+            .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 export { calculatePrice, calculateNumberOfItems, toTitleCase }

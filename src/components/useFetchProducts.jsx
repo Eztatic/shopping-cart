@@ -12,6 +12,7 @@ export const useFetchProducts = () => {
             const fetchProducts = async () => {
                   try {
                         // Uncomment only to show that loading spinner is working.
+                        // Don't uncomment if unit testing
                         // await new Promise(resolve => setTimeout(resolve, 2000));
 
                         const response = await fetch('https://fakestoreapi.com/products', {

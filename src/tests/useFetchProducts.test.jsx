@@ -55,7 +55,7 @@ describe('useFetchProducts hook', () => {
       it('should cancel the fetch on unmount', async () => {
             const controllerAbortSpy = vi.spyOn(AbortController.prototype, 'abort');
             const mockProducts = [{ id: 1, title: 'Test Product' }];
-            
+
             globalThis.fetch.mockResolvedValueOnce({
                   ok: true,
                   json: () => Promise.resolve(mockProducts),

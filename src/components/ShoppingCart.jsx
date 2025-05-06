@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import styles from '/src/styles/ShoppingCart.module.css';
 import { FaShoppingCart, FaTimes } from "react-icons/fa";
 import { calculatePrice, calculateNumberOfItems } from "./Utility.jsx";

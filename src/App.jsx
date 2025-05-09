@@ -8,48 +8,32 @@ import CheckoutPage from './components/CheckoutPage';
 import ShoppingCart from './components/ShoppingCart';
 import UnknownPage from './components/UnknownPage';
 import CartContext from './components/CartContext';
+import CartProvider from './components/CartProvider';
 import '/src/styles/App.css';
 
-function Layout({ cartItems, removeFromCart }) {
+function Layout() {
   return (
-    <CartContext.Provider value={cartItems}>
-      <ShoppingCart removeHandler={removeFromCart} />
+    <CartProvider>
+      <ShoppingCart />
       <Header />
       <Outlet />
       <Footer />
-    </CartContext.Provider>
+    </CartProvider>
   );
 }
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
-
-  const addToCart = (e, newItem) => {
-    e.preventDefault();
-    setCartItems(prevItems => [...prevItems, newItem]);
-  }
-
-  const removeFromCart = (e, id) => {
-    e.preventDefault();
-    setCartItems(prevItems => prevItems.filter((item) => item.id !== id))
-  }
-
-  const clearCart = () => setCartItems([]);
-
   return (
-
     <Routes>
       <Route element={
-        <Layout
-          cartItems={cartItems}
-          removeFromCart={removeFromCart} />}>
+        <Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route
           path="/ShoppingPage"
-          element={<ShoppingPage addHandler={addToCart} />} />
+          element={<ShoppingPage />} />
         <Route
           path="/CheckoutPage"
-          element={<CheckoutPage resetCartHandler={clearCart} />} />
+          element={<CheckoutPage />} />
       </Route>
 
       <Route path="*" element={<UnknownPage />} />

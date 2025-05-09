@@ -33,9 +33,7 @@ const Item = ({ imgURL, quantity, title, category, price }) => {
       );
 }
 
-const OrderSummary = () => {
-      const cart = useContext(CartContext);
-
+const OrderSummary = ({ cart }) => {
       return (
             <div className={Styles['order-summary']}>
                   <h2>Order Summary</h2>
@@ -89,8 +87,7 @@ const FormCheckout = () => {
       );
 }
 
-const PaymentSummary = ({ buttonHandler }) => {
-      const cart = useContext(CartContext);
+const PaymentSummary = ({ cart, buttonHandler }) => {
       const isDisabled = cart.length === 0 ? Styles.disabled1 : null;
 
       return (
@@ -113,12 +110,13 @@ const PaymentSummary = ({ buttonHandler }) => {
       );
 }
 
-const CheckoutPage = ({ resetCartHandler }) => {
+const CheckoutPage = () => {
       const [confirmation, setConfirmation] = useState(false);
+      const { cartItems, clearCart } = useContext(CartContext);
 
       const buttonHandler = (e) => {
             e.preventDefault();
-            resetCartHandler();
+            clearCart();
             setConfirmation(true);
             setTimeout(() => setConfirmation(false), 3000);
       }
@@ -127,10 +125,10 @@ const CheckoutPage = ({ resetCartHandler }) => {
             <>
                   <CheckoutConfirmation isVisible={confirmation} />
                   <section className={Styles['checkout-page']}>
-                        <OrderSummary />
+                        <OrderSummary cart={cartItems} />
                         <div>
                               <FormCheckout />
-                              <PaymentSummary buttonHandler={buttonHandler} />
+                              <PaymentSummary cart={cartItems} buttonHandler={buttonHandler} />
                         </div>
                   </section>
             </>

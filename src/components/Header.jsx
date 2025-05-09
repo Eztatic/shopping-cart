@@ -6,7 +6,7 @@ import Styles from '/src/styles/Header.module.css';
 
 
 const Header = () => {
-      const cart = useContext(CartContext);
+      const { cartItems } = useContext(CartContext);
       return (
             <header className={Styles.header}>
                   <nav>
@@ -26,7 +26,7 @@ const Header = () => {
                               <li>
                                     <Link to={'/CheckoutPage'}>
                                           Checkout
-                                          <p className={Styles.items}>{calculateNumberOfItems(cart)}</p>
+                                          <p className={Styles.items}>{calculateNumberOfItems(cartItems)}</p>
                                     </Link>
                               </li>
                         </ul>

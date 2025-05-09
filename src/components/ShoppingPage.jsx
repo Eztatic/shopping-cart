@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Styles from '/src/styles/ShoppingPage.module.css';
 import { toTitleCase } from '/src/components/Utility.jsx';
 import { ClipLoader } from "react-spinners";
 import { MdError, MdCheckCircle } from "react-icons/md";
 import { useFetchProducts } from '/src/components/useFetchProducts';
+import CartContext from './CartContext';
 
 const NetworkError = () => {
       return (
@@ -26,10 +27,11 @@ const CartConfirmation = ({ animationKey }) => {
       );
 }
 
-const ItemCard = ({ category, imgURL, title, price, handler, notify }) => {
+const ItemCard = ({ category, imgURL, title, price, notify }) => {
       const id = crypto.randomUUID();
       const [quantity, setQuantity] = useState(1);
       const itemDetails = { id, category, imgURL, title, price, quantity };
+      const { addToCart } = useContext(CartContext);
 
       const decrement = () => {
             setQuantity(prev => (prev > 1 ? prev - 1 : 1));
@@ -41,7 +43,7 @@ const ItemCard = ({ category, imgURL, title, price, handler, notify }) => {
 
       const addToCartHandler = (e) => {
             notify();
-            handler(e, itemDetails);
+            addToCart(e, itemDetails);
             setQuantity(1);
       }
 
@@ -100,7 +102,7 @@ const ItemCard = ({ category, imgURL, title, price, handler, notify }) => {
       );
 }
 
-const ShoppingPage = ({ addHandler }) => {
+const ShoppingPage = () => {
       const { products, loading, error } = useFetchProducts();
       const [animateKey, setAnimateKey] = useState(0);
 
@@ -113,8 +115,10 @@ const ShoppingPage = ({ addHandler }) => {
                   <section className={Styles['shopping-page']}>
                         <h1>Products</h1>
                         {loading
-                              && <ClipLoader color={"#006eff"} size={"64"} />}
+                              && <ClipLoader color={"#006eff"} size={"64px"} />}
+
                         {error && <NetworkError />}
+
                         <div className={Styles.products}>
                               {products.map(({ id, category, image, title, price }) => (
                                     <ItemCard
@@ -123,7 +127,6 @@ const ShoppingPage = ({ addHandler }) => {
                                           imgURL={image}
                                           title={title}
                                           price={price}
-                                          handler={addHandler}
                                           notify={notify}
                                     />
                               ))}

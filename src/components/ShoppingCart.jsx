@@ -6,12 +6,12 @@ import { calculatePrice, calculateNumberOfItems } from "./Utility.jsx";
 import CartContext from './CartContext';
 
 const CartButton = ({ openHandler }) => {
-      const cart = useContext(CartContext);
+      const { cartItems } = useContext(CartContext);
 
       return (
             <button className={styles['cart-button']} onClick={openHandler}>
                   <FaShoppingCart />
-                  <p>{calculateNumberOfItems(cart)}</p>
+                  <p>{calculateNumberOfItems(cartItems)}</p>
             </button>
       );
 }
@@ -34,9 +34,9 @@ const CartItem = (
       );
 }
 
-const ShoppingCart = ({ removeHandler }) => {
+const ShoppingCart = () => {
       const [isOpen, setIsOpen] = useState(true);
-      const cart = useContext(CartContext);
+      const { cartItems, removeFromCart } = useContext(CartContext);
 
       return (
             <>
@@ -45,9 +45,9 @@ const ShoppingCart = ({ removeHandler }) => {
                         <h1>Your Cart</h1>
                         <hr />
                         <ul>
-                              {cart.length === 0 ? <li>No Items Here</li> : null}
+                              {cartItems.length === 0 ? <li>No Items Here</li> : null}
                               {
-                                    cart.map(({ id, imgURL, title, category, price, quantity }) => {
+                                    cartItems.map(({ id, imgURL, title, category, price, quantity }) => {
                                           return <CartItem
                                                 key={id}
                                                 id={id}
@@ -56,14 +56,14 @@ const ShoppingCart = ({ removeHandler }) => {
                                                 category={category}
                                                 price={(price * quantity).toFixed(2)}
                                                 quantity={quantity}
-                                                handler={removeHandler} />;
+                                                handler={removeFromCart} />;
                                     })
                               }
                         </ul>
                         <hr />
                         <div>
-                              <p>Number of Items: {calculateNumberOfItems(cart)}</p>
-                              <p>Total: {calculatePrice(cart)}</p>
+                              <p>Number of Items: {calculateNumberOfItems(cartItems)}</p>
+                              <p>Total: {calculatePrice(cartItems)}</p>
                         </div>
                         <div>
                               <Link to={'/CheckoutPage'} className={styles['checkout-button']}>Checkout</Link>

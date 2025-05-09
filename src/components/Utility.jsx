@@ -12,7 +12,12 @@ const toTitleCase = (str) => {
             .replace(/([a-z])([A-Z])/g, '$1 $2')
             .replace(/[_-]/g, ' ')
             .toLowerCase()
-            .replace(/\b\w/g, (char) => char.toUpperCase());
+            .replace(/\b\w/g, (match, offset, fullStr) => {
+                  if (offset > 0 && fullStr[offset - 1] === "'") {
+                        return match;
+                  }
+                  return match.toUpperCase();
+            });
 }
 
 export { calculatePrice, calculateNumberOfItems, toTitleCase }
